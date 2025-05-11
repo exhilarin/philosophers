@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:01:13 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/11 07:25:48 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/11 18:34:50 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,3 +21,5 @@ int main(int argc, char *argv[])
 	take_argv(info, argc, argv);
 	
 }
+
+// TODO: For all philosophers print their actions with use thread and mutex.
