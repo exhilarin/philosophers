@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   action.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/10 23:01:13 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/14 17:34:43 by ilyas-guney      ###   ########.fr       */
+/*   Created: 2025/05/14 18:04:56 by ilyas-guney       #+#    #+#             */
+/*   Updated: 2025/05/14 18:13:10 by ilyas-guney      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/philo.h"
 
-int main(int argc, char *argv[])
+void    thinking(t_info *info)
 {
-	t_info *info;
-
-	info = malloc(sizeof(t_info));
-	check_argv(argv);
-	take_argv(info, argc, argv);
-	
+    
 }
 
-// TODO: Init all philo info.
-// TODO: 
-// TODO: For all philosophers print their actions with use thread and mutex.
+void    sleeping(t_info *info)
+{
+
+}
+void    take_right_fork(t_info *info)
+{
+
+}
+
+void    take_left_fork(t_info *info)
+{
+
+}
+
+void    eating(t_info *info)
+{
+    
+}

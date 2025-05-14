@@ -1,5 +1,5 @@
 NAME = philo
-SRCS = philo.c parse.c initalize.c utils.c
+SRCS = philo.c parse.c initalize.c monitoring.c utils.c
 OBJS_DIR = obj
 OBJS = $(OBJS_DIR)/philo.o $(OBJS_DIR)/parse.o $(OBJS_DIR)/initalize.o $(OBJS_DIR)/utils.o
 

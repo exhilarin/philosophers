@@ -11,14 +11,12 @@
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
 
-typedef struct s_program
+typedef struct s_philo
 {
-	int	dead_flag;
-	pthread_mutex_t dead_lock;
-	pthread_mutex_t	meal_lock;
-	pthread_mutex_t	write_lock;
-	t_info			*philos;
-} t_program;
+	pthread_t		*thread;
+
+} t_philo;
+
 
 typedef struct s_info
 {
@@ -35,11 +33,10 @@ typedef struct s_info
 	size_t	is_any_dead;
 	size_t	start_time;
 
-	pthread_mutex_t	*right_fork;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*write_lock;
-	pthread_mutex_t	*dead_lock;
-	pthread_mutex_t	*meal_lock;
+	pthread_mutex_t	*fork;
+	pthread_mutex_t	lock;
+	pthread_mutex_t	print_lock;
+
 }	t_info;
 
 #endif

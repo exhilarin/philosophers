@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:51:11 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/11 07:28:48 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/14 17:48:21 by ilyas-guney      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	is_digit(char *num)
 {
 	while (*num)
 	{
-		if (!('0' <= *num && *num <= '9'))
+		if (!(('0' <= *num && *num <= '9') || *num == '+'))
 			return (0);
 		num++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initalize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:18:14 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/11 18:23:57 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/14 17:36:06 by ilyas-guney      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,4 @@ void	init_philosophers(t_info *info)
 		philos[i].time_to_sleep = info->time_to_sleep;
 		philos[i].start_time = init_time();
 	}
-	
 }

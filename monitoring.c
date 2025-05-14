@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/10 23:01:13 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/14 17:34:43 by ilyas-guney      ###   ########.fr       */
+/*   Created: 2025/05/12 22:04:42 by ilyas-guney       #+#    #+#             */
+/*   Updated: 2025/05/12 22:06:20 by ilyas-guney      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/philo.h"
 
-int main(int argc, char *argv[])
+void    monitoring(t_info *info)
 {
-	t_info *info;
-
-	info = malloc(sizeof(t_info));
-	check_argv(argv);
-	take_argv(info, argc, argv);
 	
 }
-
-// TODO: Init all philo info.
-// TODO: 
-// TODO: For all philosophers print their actions with use thread and mutex.
