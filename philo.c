@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:01:13 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/15 01:28:39 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/15 04:12:17 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ int	check_argv(int argc, char *argv[])
 
 	i = 0;
 	if (argc != 5 && argc != 6)
-		return (printf("Invalid Input!\n"), 1);
+		return (printf("Error: 5 or 6 arguments required.\n"), 1);
 	while (argv[++i])
 	{
 		if (!is_digit(argv[i]) || (ft_atoi(argv[i]) < 1))
-			return (printf("Invalid Input!\n"), 1);
+			return (printf("Error: Invalid Input!\n"), 1);
 	}
 	return (0);
 }
 
-int    take_argv(t_info *info, int argc, char *argv[])
+void    take_argv(t_info *info, int argc, char *argv[])
 {
 	info->philo_count = ft_atoi(argv[1]);
 	info->time_to_starve = ft_atoi(argv[2]);
@@ -51,7 +51,6 @@ int    take_argv(t_info *info, int argc, char *argv[])
 		info->meals_count = ft_atoi(argv[5]);
 	info->is_any_dead = 0;
 	info->start_time = init_time();
-	return (0);
 }
 
 // TODO: Init all philo info.

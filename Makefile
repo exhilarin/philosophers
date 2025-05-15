@@ -1,6 +1,6 @@
 NAME = philo
 SRCS = philo.c initalize.c terminate.c utils.c
-OBJS_DIR = obj
+OBJS_DIR = Objects
 OBJS = $(OBJS_DIR)/philo.o $(OBJS_DIR)/initalize.o $(OBJS_DIR)/terminate.o $(OBJS_DIR)/utils.o
 
 CC = cc

@@ -9,7 +9,7 @@ int		ft_atoi(const char *str);
 
 // Parse
 int     check_argv(int argc, char *argv[]);
-int     take_argv(t_info *philo, int argc, char *argv[]);
+void    take_argv(t_info *philo, int argc, char *argv[]);
 
 // Init
 long	init_time(void);

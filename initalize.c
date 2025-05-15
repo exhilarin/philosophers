@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:18:14 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/15 03:29:33 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/15 04:11:47 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,20 @@ void	init_mutex(t_info *info)
 void	init_philosophers(t_info *info)
 {
 	int		i;
-	t_info *philos;
+	t_philos *philos;
 
 	i = 0;
-	philos = malloc(sizeof(t_info) * info->philo_count);
+	philos = malloc(sizeof(t_philos) * info->philo_count);
 	while (i++ < info->philo_count)
 	{
-		philos[i].philo_id = i;
-		philos[i].meals_count = info->meals_count;
-		philos[i].time_to_starve = info->time_to_starve;
-		philos[i].time_to_eat = info->time_to_eat;
-		philos[i].time_to_sleep = info->time_to_sleep;
-		philos[i].start_time = init_time();
+		philos[i].info = info;
+		philos[i].info->philo_id = i;
+		philos[i].info->meals_count = info->meals_count;
+		philos[i].info->time_to_starve = info->time_to_starve;
+		philos[i].info->time_to_eat = info->time_to_eat;
+		philos[i].info->time_to_sleep = info->time_to_sleep;
+		philos[i].info->is_dead = 0;
+		philos[i].info->start_time = init_time();
 	}
 }
 
