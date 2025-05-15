@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initalize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
+/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:18:14 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/14 17:36:06 by ilyas-guney      ###   ########.fr       */
+/*   Updated: 2025/05/15 03:29:33 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,16 @@ long	init_time(void)
 	return ((size_t)time.tv_sec * 1000 + (size_t)time.tv_usec / 1000);
 }
 
-void	init_threads(void)
+void	init_mutex(t_info *info)
 {
-	
-}
+	int				philo_count;
 
-void	init_mutex(void)
-{
-	
+	philo_count = info->philo_count;
+	info->forks = malloc(sizeof(pthread_mutex_t) * philo_count);
+	while (philo_count--)
+		pthread_mutex_init(&info->forks[philo_count], NULL);
+	pthread_mutex_init(&info->print_lock, NULL);
+	pthread_mutex_init(&info->lock, NULL);
 }
 
 void	init_philosophers(t_info *info)
@@ -48,3 +50,8 @@ void	init_philosophers(t_info *info)
 		philos[i].start_time = init_time();
 	}
 }
+
+// void	init_threads(t_info	*info)
+// {
+
+// }

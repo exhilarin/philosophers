@@ -13,15 +13,16 @@
 
 typedef struct s_philo
 {
-	pthread_t		*thread;
+	pthread_t		*threads;
+
+	pthread_mutex_t *left_fork;
+	pthread_mutex_t *right_fork;
 
 } t_philo;
 
 
 typedef struct s_info
 {
-	pthread_t thread;
-
 	int		philo_id;
 	int		philo_count;
 	int		meals_count;
@@ -33,7 +34,7 @@ typedef struct s_info
 	size_t	is_any_dead;
 	size_t	start_time;
 
-	pthread_mutex_t	*fork;
+	pthread_mutex_t	*forks;
 	pthread_mutex_t	lock;
 	pthread_mutex_t	print_lock;
 

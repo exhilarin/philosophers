@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
+/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:01:13 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/14 17:34:43 by ilyas-guney      ###   ########.fr       */
+/*   Updated: 2025/05/15 01:28:39 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,45 @@
 
 int main(int argc, char *argv[])
 {
-	t_info *info;
+	t_info info;
 
-	info = malloc(sizeof(t_info));
-	check_argv(argv);
-	take_argv(info, argc, argv);
-	
+	if (check_argv(argc, argv))
+		return (1);
+	take_argv(&info, argc, argv);
+	init_mutex(&info);
+	init_philosophers(&info);
+	// init_threads(&info);
+	// destroy_threads(&info);
+	destroy_mutex(&info);
+}
+
+int	check_argv(int argc, char *argv[])
+{
+	int	i;
+
+	i = 0;
+	if (argc != 5 && argc != 6)
+		return (printf("Invalid Input!\n"), 1);
+	while (argv[++i])
+	{
+		if (!is_digit(argv[i]) || (ft_atoi(argv[i]) < 1))
+			return (printf("Invalid Input!\n"), 1);
+	}
+	return (0);
+}
+
+int    take_argv(t_info *info, int argc, char *argv[])
+{
+	info->philo_count = ft_atoi(argv[1]);
+	info->time_to_starve = ft_atoi(argv[2]);
+	info->time_to_eat = ft_atoi(argv[3]);
+	info->time_to_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+		info->meals_count = ft_atoi(argv[5]);
+	info->is_any_dead = 0;
+	info->start_time = init_time();
+	return (0);
 }
 
 // TODO: Init all philo info.
-// TODO: 
 // TODO: For all philosophers print their actions with use thread and mutex.

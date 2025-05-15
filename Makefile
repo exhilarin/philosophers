@@ -1,7 +1,7 @@
 NAME = philo
-SRCS = philo.c parse.c initalize.c monitoring.c utils.c
+SRCS = philo.c initalize.c terminate.c utils.c
 OBJS_DIR = obj
-OBJS = $(OBJS_DIR)/philo.o $(OBJS_DIR)/parse.o $(OBJS_DIR)/initalize.o $(OBJS_DIR)/utils.o
+OBJS = $(OBJS_DIR)/philo.o $(OBJS_DIR)/initalize.o $(OBJS_DIR)/terminate.o $(OBJS_DIR)/utils.o
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
