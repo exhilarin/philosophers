@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:01:13 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/15 04:12:17 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/15 04:15:09 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ void    take_argv(t_info *info, int argc, char *argv[])
 	info->start_time = init_time();
 }
 
-// TODO: Init all philo info.
-// TODO: For all philosophers print their actions with use thread and mutex.
+// TODO: Write Waiting and Dead functions.
+// TODO: Write actions without eating.
+// TODO: Create Threads.

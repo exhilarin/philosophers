@@ -17,7 +17,7 @@ $(OBJS_DIR)/%.o: %.c
 
 clean:
 	@rm -f $(OBJS)
-	@rm -rf obj
+	@rm -rf Objects
 
 fclean: clean
 	@rm -f $(NAME)
