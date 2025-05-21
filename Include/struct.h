@@ -1,5 +1,5 @@
-#ifndef STRUCT_H
-# define STRUCT_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
 # include <unistd.h>
 # include <string.h>
@@ -11,29 +11,44 @@
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
 
+
+typedef struct s_philo t_philo;
+
 typedef struct s_info
 {
-	int		philo_id;
-	int		philo_count;
-	int		meals_count;
-	int		meals_left;
+	int				philo_count;		// Filozof sayısı
+	int				time_to_eat;		// ms cinsinden: yeme süresi
+	int				time_to_sleep;		// ms cinsinden: uyuma süresi
+	int				time_to_starve;		// ms cinsinden: ölüm süresi
+	int				must_eat_count;		// Opsiyonel: her filozofun yemesi gereken minimum sayı
+	int				all_ate_flag;		// Hepsi yeterince yedi mi?
+	int				end_sim;			// Ölüm oldu mu? Simülasyonu durdur
 
-	size_t	time_to_eat;
-	size_t	time_to_sleep;
-	size_t	time_to_starve;
-	size_t	start_time;
-	size_t	is_any_dead;
-	size_t	is_dead;
+	size_t			start_time;			// Simülasyon başlangıç zamanı (ms)
 
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	lock;
-	pthread_mutex_t	print_lock;
+	pthread_mutex_t	*forks;				// Çatal mutexleri
+	pthread_mutex_t	print_mutex;		// Çıktıların karışmaması için
+	pthread_mutex_t	stop_mutex;			// stop_flag erişimini korur
 
+	t_philo	*philo;
 }	t_info;
 
 typedef struct s_philo
 {
-	t_info *info;
-} t_philos;
+	int				philo_id;			// Filozof ID’si (1'den başlar)
+	int				meals_eaten;		// Şu ana kadar kaç kez yedi
+	int				is_alive;
+
+	size_t			last_meal_time;		// En son yemek yediği zaman (ms)
+
+	pthread_t		thread;				// Bu filozofun thread’i
+
+	pthread_mutex_t	*left_fork;			// Solundaki çatal (mutex)
+	pthread_mutex_t	*right_fork;		// Sağındaki çatal (mutex)
+
+	t_info			*info;				// Genel simülasyon bilgilerine erişim
+	pthread_mutex_t	meal_mutex;			// last_meal_time erişimi için koruma
+
+}	t_philo;
 
 #endif

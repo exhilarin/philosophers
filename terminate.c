@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 00:56:53 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/15 01:07:18 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/21 07:34:38 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	destroy_mutex(t_info *info)
 		pthread_mutex_unlock(&info->forks[philo_count]);
 		pthread_mutex_destroy(&info->forks[philo_count]);
 	}
-	pthread_mutex_unlock(&info->print_lock);
-	pthread_mutex_destroy(&info->print_lock);
-	pthread_mutex_unlock(&info->lock);
-	pthread_mutex_destroy(&info->lock);
+	pthread_mutex_unlock(&info->print_mutex);
+	pthread_mutex_destroy(&info->print_mutex);
+	pthread_mutex_unlock(&info->stop_mutex);
+	pthread_mutex_destroy(&info->stop_mutex);;
 }

@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:01:13 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/15 04:15:09 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/21 08:02:16 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	take_argv(&info, argc, argv);
 	init_mutex(&info);
 	init_philosophers(&info);
-	// init_threads(&info);
+	init_threads(&info);
 	// destroy_threads(&info);
 	destroy_mutex(&info);
 }
@@ -48,11 +48,14 @@ void    take_argv(t_info *info, int argc, char *argv[])
 	info->time_to_eat = ft_atoi(argv[3]);
 	info->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		info->meals_count = ft_atoi(argv[5]);
-	info->is_any_dead = 0;
-	info->start_time = init_time();
+		info->must_eat_count = ft_atoi(argv[5]);
+	else
+		info->must_eat_count = -1;
+	info->end_sim = 0;
+	info->start_time = get_time();
 }
 
-// TODO: Write Waiting and Dead functions.
-// TODO: Write actions without eating.
-// TODO: Create Threads.
+// TODO: Actionları yaz.
+// TODO: Thread oluştur.
+// TODO: Monitör thread oluştur.
+// TODO: Rutin fonksiyonu yaz.
