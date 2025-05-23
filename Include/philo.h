@@ -16,7 +16,7 @@ void    take_argv(t_info *philo, int argc, char *argv[]);
 long	get_time(void);
 void	smart_sleep(size_t wait_time);
 void	init_mutex(t_info *info);
-void	init_philosophers(t_info *info);
+void	init_philosophers(t_philo *philo, t_info *info);
 void	init_threads(t_info *info);
 
 // Actions

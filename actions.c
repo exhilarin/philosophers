@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 18:04:56 by ilyas-guney       #+#    #+#             */
-/*   Updated: 2025/05/21 08:01:51 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/22 18:49:33 by ilyas-guney      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,22 @@ void    eating(t_philo *philo)
     pthread_mutex_unlock(&philo->meal_mutex);
     philo_print(philo->info, philo->philo_id, "has eaten");
 }
-void    take_forks(t_philo *philo)
+void    take_forks(t_info *info, t_philo *philo)
 {
-    pthread_mutex_lock(philo->left_fork);
-    philo_print(philo->info, philo->philo_id, "has taken a fork");
-    pthread_mutex_lock(philo->right_fork);
-    philo_print(philo->info, philo->philo_id, "has taken a fork");
+    if (philo->philo_id % 2 == 0)
+    {
+        pthread_mutex_lock(philo->right_fork);
+        philo_print(philo->info, philo->philo_id, "has taken a fork");
+        pthread_mutex_lock(philo->left_fork);
+        philo_print(philo->info, philo->philo_id, "has taken a fork");
+    }
+    else
+    {
+        pthread_mutex_lock(philo->left_fork);
+        philo_print(philo->info, philo->philo_id, "has taken a fork");
+        pthread_mutex_lock(philo->right_fork);
+        philo_print(philo->info, philo->philo_id, "has taken a fork");
+    }
 }
 
 void    drop_forks(t_philo *philo)

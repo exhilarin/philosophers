@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initalize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:18:14 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/21 08:08:09 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/22 18:48:36 by ilyas-guney      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,24 @@ void	init_mutex(t_info *info)
 	pthread_mutex_init(&info->stop_mutex, NULL);
 }
 
-void	init_philosophers(t_info *info)
+void	init_philosophers(t_philo *philo ,t_info *info)
 {
 	int		i;
-	t_philo *philos;
 
 	i = -1;
-	philos = malloc(sizeof(t_philo) * info->philo_count);
 	while (++i < info->philo_count)
 	{
-		philos[i].philo_id = i;
-		philos[i].info = info;
-		philos[i].info->time_to_starve = info->time_to_starve;
-		philos[i].info->must_eat_count = info->must_eat_count;
-		philos[i].info->time_to_eat = info->time_to_eat;
-		philos[i].info->time_to_sleep = info->time_to_sleep;
-		philos[i].info->end_sim = 0;
-		philos[i].info->start_time = get_time();
-		philos[i].left_fork = &info->forks[i];
-		philos[i].right_fork = &info->forks[(i + 1) % info->philo_count];
-		philos[i].is_alive = 1;
+		philo[i].philo_id = i;
+		philo[i].info = info;
+		philo[i].info->time_to_starve = info->time_to_starve;
+		philo[i].info->must_eat_count = info->must_eat_count;
+		philo[i].info->time_to_eat = info->time_to_eat;
+		philo[i].info->time_to_sleep = info->time_to_sleep;
+		philo[i].info->end_sim = 0;
+		philo[i].info->start_time = get_time();
+		philo[i].left_fork = &info->forks[i];
+		philo[i].right_fork = &info->forks[(i + 1) % info->philo_count];
+		philo[i].is_alive = 1;
 	}
 }
 

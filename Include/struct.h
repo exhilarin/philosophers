@@ -24,7 +24,7 @@ typedef struct s_info
 	int				all_ate_flag;		// Hepsi yeterince yedi mi?
 	int				end_sim;			// Ölüm oldu mu? Simülasyonu durdur
 
-	size_t			start_time;			// Simülasyon başlangıç zamanı (ms)
+	int				start_time;			// Simülasyon başlangıç zamanı (ms)
 
 	pthread_mutex_t	*forks;				// Çatal mutexleri
 	pthread_mutex_t	print_mutex;		// Çıktıların karışmaması için
@@ -39,7 +39,7 @@ typedef struct s_philo
 	int				meals_eaten;		// Şu ana kadar kaç kez yedi
 	int				is_alive;
 
-	size_t			last_meal_time;		// En son yemek yediği zaman (ms)
+	int				last_meal_time;		// En son yemek yediği zaman (ms)
 
 	pthread_t		thread;				// Bu filozofun thread’i
 
