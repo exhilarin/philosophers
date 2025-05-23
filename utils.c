@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:51:11 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/23 23:35:57 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/24 02:03:46 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,31 +51,28 @@ int	is_digit(char *num)
 	return (1);
 }
 
-int	is_any_dead(t_info *info)
-{
-	int	i;
-
-	i = 0;
-	while (i < info->philo_count)
-	{
-		pthread_mutex_lock(&info->philo[i].meal_mutex);
-		if (get_time() - info->philo[i].last_meal_time > info->time_to_starve)
-		{
-			info->end_sim = 1;
-			info->philo[i].is_alive = 0;
-			pthread_mutex_unlock(&info->philo[i].meal_mutex);
-			return (i);
-		}
-		pthread_mutex_unlock(&info->philo[i].meal_mutex);
-		i++;
-	}
-	return (-1);
-}
-
 void	philo_print(t_info *info, int philo_id, char *str)
 {
 	pthread_mutex_lock(&info->print_mutex);
 	if (info->end_sim == 0)
-		printf("%zu %d %s\n", get_time() - info->start_time, philo_id + 1, str);
+		printf("%ld %d %s\n", get_time() - info->start_time, philo_id + 1, str);
 	pthread_mutex_unlock(&info->print_mutex);
+}
+
+long	get_time(void)
+{
+	struct timeval	time;
+
+	if (gettimeofday(&time, NULL) == -1)
+		printf("gettimeofday() error\n");
+	return ((size_t)time.tv_sec * 1000 + (size_t)time.tv_usec / 1000);
+}
+
+void	smart_sleep(size_t wait_time)
+{
+	size_t	start;
+
+	start = get_time();
+	while ((get_time() - start) < wait_time)
+		usleep(500);
 }
