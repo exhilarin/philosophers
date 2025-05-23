@@ -6,6 +6,7 @@
 // Utils
 int		is_digit(char *num);
 int		ft_atoi(const char *str);
+int     is_any_dead(t_info *info);
 void	philo_print(t_info *info, int philo_id, char *str);
 
 // Parse
@@ -21,15 +22,14 @@ void	init_threads(t_info *info);
 
 // Actions
 void	take_forks(t_philo *philo);
-void	eating(t_philo *philo);
-void	sleeping(t_philo *philo);
+void	eat(t_philo *philo);
 void	drop_forks(t_philo *philo);
+void	sleeping(t_philo *philo);
+
 
 // Monitor
 void	*monitor(void *arg);
 void	*philo_routine(void *arg);
-void	take_right_fork(t_philo *philo);
-void	take_left_fork(t_philo *philo);
 
 // Termninate
 void	destroy_mutex(t_info *info);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
+/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:01:13 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/22 18:47:32 by ilyas-guney      ###   ########.fr       */
+/*   Updated: 2025/05/23 23:54:09 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	init_philosophers(&philo, &info);
 	init_threads(&info);
 	// destroy_threads(&info);
-	destroy_mutex(&info);
+	//  destroy_mutex(&info);
 }
 
 int	check_argv(int argc, char *argv[])

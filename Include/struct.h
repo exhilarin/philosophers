@@ -35,20 +35,20 @@ typedef struct s_info
 
 typedef struct s_philo
 {
-	int				philo_id;			// Filozof ID’si (1'den başlar)
+	int				id;			// Filozof ID’si (1'den başlar)
 	int				meals_eaten;		// Şu ana kadar kaç kez yedi
 	int				is_alive;
 
 	int				last_meal_time;		// En son yemek yediği zaman (ms)
 
 	pthread_t		thread;				// Bu filozofun thread’i
-
+	pthread_t 		monitor_thread;		// Bu filozofun monitor thread’i	
+										
 	pthread_mutex_t	*left_fork;			// Solundaki çatal (mutex)
 	pthread_mutex_t	*right_fork;		// Sağındaki çatal (mutex)
-
-	t_info			*info;				// Genel simülasyon bilgilerine erişim
 	pthread_mutex_t	meal_mutex;			// last_meal_time erişimi için koruma
 
+	t_info			*info;				// Genel simülasyon bilgilerine erişim
 }	t_philo;
 
 #endif

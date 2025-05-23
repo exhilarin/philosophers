@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initalize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
+/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:18:14 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/22 18:48:36 by ilyas-guney      ###   ########.fr       */
+/*   Updated: 2025/05/23 23:54:31 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ void	init_mutex(t_info *info)
 	pthread_mutex_init(&info->stop_mutex, NULL);
 }
 
-void	init_philosophers(t_philo *philo ,t_info *info)
+void	init_philosophers(t_philo *philo, t_info *info)
 {
 	int		i;
 
 	i = -1;
 	while (++i < info->philo_count)
 	{
-		philo[i].philo_id = i;
+		philo[i].id = i;
 		philo[i].info = info;
 		philo[i].info->time_to_starve = info->time_to_starve;
 		philo[i].info->must_eat_count = info->must_eat_count;
@@ -56,19 +56,19 @@ void	init_philosophers(t_philo *philo ,t_info *info)
 
 void	init_threads(t_info *info)
 {
-	int		i;
-	t_philo	*philos;
+	int	i;
 
 	i = -1;
-	philos = info->philo;
 	while (++i < info->philo_count)
 	{
-		pthread_create(&philos[i].thread, NULL, philo_routine, &philos[i]);
-		pthread_join(philos[i].thread, NULL);
+		pthread_create(&info->philo[i].thread, NULL, philo_routine,
+			(void *)&info->philo[i]);
+		printf("Philosopher %d is created\n", info->philo[i].id);
+		pthread_create(&info->philo[i].monitor_thread, NULL, monitor,
+			(void *)&info->philo[i]);
 	}
-	pthread_create(&info->philo->thread, NULL, monitor, info);
-	pthread_join(info->philo->thread, NULL);
 }
+
 void	smart_sleep(size_t wait_time)
 {
 	size_t	start;

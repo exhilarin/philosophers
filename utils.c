@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:51:11 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/21 08:03:26 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/23 23:35:57 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,27 @@ int	is_digit(char *num)
 		num++;
 	}
 	return (1);
+}
+
+int	is_any_dead(t_info *info)
+{
+	int	i;
+
+	i = 0;
+	while (i < info->philo_count)
+	{
+		pthread_mutex_lock(&info->philo[i].meal_mutex);
+		if (get_time() - info->philo[i].last_meal_time > info->time_to_starve)
+		{
+			info->end_sim = 1;
+			info->philo[i].is_alive = 0;
+			pthread_mutex_unlock(&info->philo[i].meal_mutex);
+			return (i);
+		}
+		pthread_mutex_unlock(&info->philo[i].meal_mutex);
+		i++;
+	}
+	return (-1);
 }
 
 void	philo_print(t_info *info, int philo_id, char *str)
