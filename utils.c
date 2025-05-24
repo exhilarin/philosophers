@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:51:11 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/24 20:06:30 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/24 20:34:20 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void	philo_print(t_philo *philo, int id, char *str)
 {
 	pthread_mutex_lock(&philo->info->print_mutex);
 	if (philo->info->end_sim == 0)
-		printf("%ld %d %s\n", get_time() - philo->info->start_time, id + 1, str);
+		printf("%zu %d %s\n", get_time() - philo->info->start_time, id + 1, str);
 	pthread_mutex_unlock(&philo->info->print_mutex);
 }
 
-long	get_time(void)
+size_t	get_time(void)
 {
 	struct timeval	time;
 

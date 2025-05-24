@@ -24,7 +24,7 @@ typedef struct s_info
 	int				all_ate_flag;		// Hepsi yeterince yedi mi?
 	int				end_sim;			// Ölüm oldu mu? Simülasyonu durdur
 
-	int				start_time;			// Simülasyon başlangıç zamanı (ms)
+	size_t			start_time;			// Simülasyon başlangıç zamanı (ms)
 
 	pthread_t		monitor_thread;
 
@@ -33,7 +33,6 @@ typedef struct s_info
 	pthread_mutex_t	stop_mutex;			// stop_flag erişimini korur
 
 	t_philo			*philo;				// Filozoflar dizisi
-
 }	t_info;
 
 typedef struct s_philo
@@ -47,6 +46,7 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fork;			// Solundaki çatal (mutex)
 	pthread_mutex_t	*right_fork;		// Sağındaki çatal (mutex)
 	pthread_mutex_t	meal_mutex;		// last_meal_time erişimi için koruma
+
 	t_info *info;
 }	t_philo;
 

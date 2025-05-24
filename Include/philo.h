@@ -13,7 +13,7 @@ int     check_argv(int argc, char *argv[]);
 void    take_argv(t_info *info, int argc, char *argv[]);
 
 // Init
-long	get_time(void);
+size_t	get_time(void);
 void	smart_sleep(size_t wait_time);
 void	init_mutex(t_info *info);
 void	init_philosophers(t_info *info);

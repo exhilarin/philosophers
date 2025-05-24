@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 07:49:52 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/24 20:03:45 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/24 20:18:27 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,4 @@ void    take_argv(t_info *info, int argc, char *argv[])
 		info->must_eat_count = -1;
 	info->end_sim = 0;
 	info->all_ate_flag = 0;
-	info->start_time = get_time();
 }

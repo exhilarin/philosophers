@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:18:14 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/24 19:36:04 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/24 20:30:15 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	init_threads(t_info *info)
 
 	i = -1;
 	thread = malloc(sizeof(pthread_t) * info->philo_count);
+	info->start_time = get_time();
 	while (++i < info->philo_count)
 		pthread_create(&thread[i], NULL, philo_routine, (void *)&info->philo[i]);
 	// pthread_create(info->monitor_thread, NULL, monitor, NULL);
