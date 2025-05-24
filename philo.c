@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:01:13 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/24 20:26:15 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/24 22:26:12 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,3 +25,5 @@ int main(int argc, char *argv[])
 	// destroy_threads(&info);
 	// destroy_mutex(&info);
 }
+
+// TODO: Monitor fonksiyonunu ve monitor için gerekli fonksiyonları yaz.
