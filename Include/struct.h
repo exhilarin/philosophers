@@ -26,6 +26,8 @@ typedef struct s_info
 
 	int				start_time;			// Simülasyon başlangıç zamanı (ms)
 
+	pthread_t		monitor_thread;
+
 	pthread_mutex_t	*forks;				// Çatal mutexleri
 	pthread_mutex_t	print_mutex;		// Çıktıların karışmaması için
 	pthread_mutex_t	stop_mutex;			// stop_flag erişimini korur
@@ -41,13 +43,11 @@ typedef struct s_philo
 	int				is_alive;
 
 	int				last_meal_time;		// En son yemek yediği zaman (ms)
-
-	pthread_t		*thread;				// Bu filozofun thread’i	
 										
 	pthread_mutex_t	*left_fork;			// Solundaki çatal (mutex)
 	pthread_mutex_t	*right_fork;		// Sağındaki çatal (mutex)
-	pthread_mutex_t	meal_mutex;			// last_meal_time erişimi için koruma
-
+	pthread_mutex_t	meal_mutex;		// last_meal_time erişimi için koruma
+	t_info *info;
 }	t_philo;
 
 #endif

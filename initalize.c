@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:18:14 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/24 02:00:15 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/24 19:36:04 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,22 @@ void	init_philosophers(t_info *info)
 		info->philo[i].last_meal_time = get_time();
 		info->philo[i].left_fork = &info->forks[i];
 		info->philo[i].right_fork = &info->forks[(i + 1) % info->philo_count];
+		info->philo[i].info = info;
 	}
+}
+
+void	init_threads(t_info *info)
+{
+	int i;
+	pthread_t		*thread;
+
+	i = -1;
+	thread = malloc(sizeof(pthread_t) * info->philo_count);
+	while (++i < info->philo_count)
+		pthread_create(&thread[i], NULL, philo_routine, (void *)&info->philo[i]);
+	// pthread_create(info->monitor_thread, NULL, monitor, NULL);
+	i = -1;
+	while (++i < info->philo_count)
+		pthread_join(thread[i], NULL);
+	// pthread_join(info->monitor_thread, NULL);
 }

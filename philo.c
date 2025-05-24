@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:01:13 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/24 02:09:04 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/24 18:28:01 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	take_argv(&info, argc, argv);
 	init_mutex(&info);
 	init_philosophers(&info);
-	// init_threads(&info);
+	init_threads(&info);
 	// destroy_threads(&info);
 	// destroy_mutex(&info);
 }

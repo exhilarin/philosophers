@@ -6,11 +6,37 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 07:49:52 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/24 02:04:02 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/24 20:03:45 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/philo.h"
+
+void *philo_routine(void *arg)
+{
+	t_philo *philo;
+	philo = (t_philo *)arg;
+	int i = -1;
+
+	while (++i < 5)
+	{
+		take_forks(philo);
+		eating(philo);
+		drop_forks(philo);
+		sleeping(philo);
+	}
+	return (NULL);
+}
+
+// void	*monitor(void *arg)
+// {
+	
+// }
+
+// int	should_stop(t_info *info)
+// {
+	
+// }
 
 int	check_argv(int argc, char *argv[])
 {
