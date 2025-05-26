@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:51:11 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/24 20:34:20 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/26 21:02:49 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,6 @@ int	is_digit(char *num)
 	return (1);
 }
 
-void	philo_print(t_philo *philo, int id, char *str)
-{
-	pthread_mutex_lock(&philo->info->print_mutex);
-	if (philo->info->end_sim == 0)
-		printf("%zu %d %s\n", get_time() - philo->info->start_time, id + 1, str);
-	pthread_mutex_unlock(&philo->info->print_mutex);
-}
-
 size_t	get_time(void)
 {
 	struct timeval	time;
@@ -75,4 +67,13 @@ void	smart_sleep(size_t wait_time)
 	start = get_time();
 	while ((get_time() - start) < wait_time)
 		usleep(500);
+}
+
+void	philo_print(t_philo *philo, int id, char *str)
+{
+	pthread_mutex_lock(&philo->info->print_mutex);
+	if (philo->info->end_sim == 0)
+		printf("%zu %d %s\n", get_time() - philo->info->start_time, id + 1, str);
+	pthread_mutex_unlock(&philo->info->print_mutex);
+	usleep(100000);
 }

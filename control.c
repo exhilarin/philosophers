@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   monitor.c                                          :+:      :+:    :+:   */
+/*   control.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 07:49:52 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/24 20:18:27 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/26 20:59:28 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 void *philo_routine(void *arg)
 {
 	t_philo *philo;
-	philo = (t_philo *)arg;
-	int i = -1;
 
-	while (++i < 5)
+	philo = (t_philo *)arg;
+	while (1)
 	{
 		take_forks(philo);
 		eating(philo);
@@ -28,15 +27,42 @@ void *philo_routine(void *arg)
 	return (NULL);
 }
 
+// TODO: 			-Monitor-
+// TODO: Herkes yemesi gerektiği kadar yemiş mi?
+// TODO: Herhangi bir philo ölmüş mü?
+
 // void	*monitor(void *arg)
 // {
-	
+// 	t_philo	*philo;
+
+// 	philo = (t_philo *)arg;
+// 	while (1)
+// 	{
+// 		if (should_stop(philo->info))
+// 		{
+			
+// 		}
+// 	}
 // }
 
-// int	should_stop(t_info *info)
-// {
-	
-// }
+int	should_stop(t_philo *philo)
+{
+	if ((get_time() - (size_t)philo->last_meal_time) > (size_t)(philo->info->time_to_starve))
+	{
+		pthread_mutex_lock(&philo->info->stop_mutex);
+		philo->info->end_sim = 1;
+		pthread_mutex_lock(&philo->info->stop_mutex);
+		return (1);
+	}
+	if (philo->info->all_ate_flag == philo->info->philo_count)
+		{
+		pthread_mutex_lock(&philo->info->stop_mutex);
+		philo->info->end_sim = 2;
+		pthread_mutex_lock(&philo->info->stop_mutex);
+		return (2);
+	}
+	return (0);
+}
 
 int	check_argv(int argc, char *argv[])
 {
