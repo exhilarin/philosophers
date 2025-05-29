@@ -32,6 +32,7 @@ typedef struct s_info
 	pthread_mutex_t	*forks;				// Çatal mutexleri
 	pthread_mutex_t	print_mutex;		// Çıktıların karışmaması için
 	pthread_mutex_t	stop_mutex;			// stop_flag erişimini korur
+	pthread_mutex_t	eat_mutex;
 
 	t_philo			*philo;				// Filozoflar dizisi
 }	t_info;
@@ -46,7 +47,6 @@ typedef struct s_philo
 										
 	pthread_mutex_t	*left_fork;			// Solundaki çatal (mutex)
 	pthread_mutex_t	*right_fork;		// Sağındaki çatal (mutex)
-	pthread_mutex_t	meal_mutex;			// last_meal_time erişimi için koruma
 
 	t_info *info;
 }	t_philo;

@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 07:49:52 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/29 20:09:26 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/29 21:09:49 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ void *philo_routine(void *arg)
 
 int	should_stop(t_philo *philo)
 {
+    pthread_mutex_lock(&philo->info->eat_mutex);
 	if (philo->info->all_ate_flag == philo->info->philo_count)
 	{
         pthread_mutex_lock(&philo->info->stop_mutex);
         philo->info->end_sim = 1;
         pthread_mutex_unlock(&philo->info->stop_mutex);
+        pthread_mutex_unlock(&philo->info->eat_mutex);
 		return (0);
 	}
 	if ((get_time() - (size_t)philo->last_meal_time) > (size_t)(philo->info->time_to_starve))
@@ -41,8 +43,10 @@ int	should_stop(t_philo *philo)
         pthread_mutex_lock(&philo->info->stop_mutex);
         philo->info->end_sim = 2;
         pthread_mutex_unlock(&philo->info->stop_mutex);
+        pthread_mutex_unlock(&philo->info->eat_mutex);
 		return (0);
 	}
+    pthread_mutex_unlock(&philo->info->eat_mutex);
 	return (1);
 }
 

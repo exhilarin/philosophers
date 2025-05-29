@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:18:14 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/29 18:57:21 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/29 21:07:33 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_mutex(t_info *info)
 		pthread_mutex_init(&info->forks[i], NULL);
 	pthread_mutex_init(&info->print_mutex, NULL);
 	pthread_mutex_init(&info->stop_mutex, NULL);
+	pthread_mutex_init(&info->eat_mutex, NULL);
 }
 
 void	init_philosophers(t_info *info)

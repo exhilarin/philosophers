@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:51:11 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/26 21:02:49 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/29 20:57:37 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,10 @@ void	smart_sleep(size_t wait_time)
 void	philo_print(t_philo *philo, int id, char *str)
 {
 	pthread_mutex_lock(&philo->info->print_mutex);
+	pthread_mutex_lock(&philo->info->stop_mutex);
 	if (philo->info->end_sim == 0)
 		printf("%zu %d %s\n", get_time() - philo->info->start_time, id + 1, str);
 	pthread_mutex_unlock(&philo->info->print_mutex);
-	usleep(100000);
+	pthread_mutex_unlock(&philo->info->stop_mutex);
+
 }
