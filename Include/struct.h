@@ -16,6 +16,7 @@ typedef struct s_philo t_philo;
 
 typedef struct s_info
 {
+	int				dead;
 	int				philo_count;		// Filozof sayısı
 	int				time_to_eat;		// ms cinsinden: yeme süresi
 	int				time_to_sleep;		// ms cinsinden: uyuma süresi
@@ -41,7 +42,7 @@ typedef struct s_philo
 	int				meals_eaten;		// Şu ana kadar kaç kez yedi
 	int				is_alive;
 
-	int				last_meal_time;		// En son yemek yediği zaman (ms)
+	size_t			last_meal_time;		// En son yemek yediği zaman (ms)
 										
 	pthread_mutex_t	*left_fork;			// Solundaki çatal (mutex)
 	pthread_mutex_t	*right_fork;		// Sağındaki çatal (mutex)
