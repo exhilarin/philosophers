@@ -6,6 +6,7 @@ OBJS = $(OBJS_DIR)/philo.o $(OBJS_DIR)/initalize.o $(OBJS_DIR)/actions.o $(OBJS_
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
