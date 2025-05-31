@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initalize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:18:14 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/29 21:07:33 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/31 19:33:35 by ilyas-guney      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	init_threads(t_info *info)
 	info->start_time = get_time();
 	while (++i < info->philo_count)
 		pthread_create(&thread[i], NULL, philo_routine, (void *)&info->philo[i]);
-	// pthread_create(&info->monitor_thread, NULL, monitor, NULL);
+	pthread_create(&info->monitor_thread, NULL, monitor, (void *)info);
 	i = -1;
 	while (++i < info->philo_count)
 		pthread_join(thread[i], NULL);
-	// pthread_join(info->monitor_thread, NULL);
+	pthread_join(info->monitor_thread, NULL);
 }

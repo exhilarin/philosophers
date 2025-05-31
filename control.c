@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 07:49:52 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/29 21:09:49 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/31 19:48:05 by ilyas-guney      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,34 @@ void *philo_routine(void *arg)
 	return (NULL);
 }
 
+void	*monitor(void *arg)
+{
+	t_info *info;
+	
+	info = (t_info *)arg;
+	while (1)
+	{
+		pthread_mutex_lock(&info->stop_mutex);
+		if (info->end_sim == 1)
+		{
+			pthread_mutex_unlock(&info->stop_mutex);
+			pthread_mutex_lock(&info->print_mutex);
+			printf("%zu %s\n", get_time() - info->start_time, "Simulation ended successfully");
+			pthread_mutex_unlock(&info->print_mutex);
+			return (NULL);
+		}
+		if (info->end_sim == 2)
+		{
+			pthread_mutex_unlock(&info->stop_mutex);
+			pthread_mutex_lock(&info->print_mutex);
+			printf("%zu %d %s\n", get_time() - info->start_time, info->dead + 1, "dead");
+			pthread_mutex_unlock(&info->print_mutex);
+			return (NULL);
+		}
+		pthread_mutex_unlock(&info->stop_mutex);
+	}
+}
+
 int	should_stop(t_philo *philo)
 {
     pthread_mutex_lock(&philo->info->eat_mutex);
@@ -41,6 +69,7 @@ int	should_stop(t_philo *philo)
 	if ((get_time() - (size_t)philo->last_meal_time) > (size_t)(philo->info->time_to_starve))
 	{
         pthread_mutex_lock(&philo->info->stop_mutex);
+		philo->info->dead = philo->id;
         philo->info->end_sim = 2;
         pthread_mutex_unlock(&philo->info->stop_mutex);
         pthread_mutex_unlock(&philo->info->eat_mutex);

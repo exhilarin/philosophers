@@ -26,7 +26,7 @@ void	drop_forks(t_philo *philo);
 void	sleeping(t_philo *philo);
 
 // // Control
-// void	*monitor(void *arg);
+void	*monitor(void *arg);
 void	*philo_routine(void *arg);
 int     should_stop(t_philo *philo);
 

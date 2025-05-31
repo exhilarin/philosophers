@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:51:11 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/29 20:57:37 by iguney           ###   ########.fr       */
+/*   Updated: 2025/05/31 19:39:49 by ilyas-guney      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,4 @@ void	philo_print(t_philo *philo, int id, char *str)
 		printf("%zu %d %s\n", get_time() - philo->info->start_time, id + 1, str);
 	pthread_mutex_unlock(&philo->info->print_mutex);
 	pthread_mutex_unlock(&philo->info->stop_mutex);
-
 }
