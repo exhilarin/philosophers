@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
+/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 07:49:52 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/31 19:48:05 by ilyas-guney      ###   ########.fr       */
+/*   Updated: 2025/06/02 21:48:42 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void *philo_routine(void *arg)
 	t_philo *philo;
 
 	philo = (t_philo *)arg;
-	while (should_stop(philo))
+	while (!should_stop(philo->info))
 	{
 		take_forks(philo);
 		eating(philo);
@@ -32,51 +32,12 @@ void	*monitor(void *arg)
 	t_info *info;
 	
 	info = (t_info *)arg;
-	while (1)
+	while (!should_stop(info))
 	{
-		pthread_mutex_lock(&info->stop_mutex);
-		if (info->end_sim == 1)
-		{
-			pthread_mutex_unlock(&info->stop_mutex);
-			pthread_mutex_lock(&info->print_mutex);
-			printf("%zu %s\n", get_time() - info->start_time, "Simulation ended successfully");
-			pthread_mutex_unlock(&info->print_mutex);
-			return (NULL);
-		}
-		if (info->end_sim == 2)
-		{
-			pthread_mutex_unlock(&info->stop_mutex);
-			pthread_mutex_lock(&info->print_mutex);
-			printf("%zu %d %s\n", get_time() - info->start_time, info->dead + 1, "dead");
-			pthread_mutex_unlock(&info->print_mutex);
-			return (NULL);
-		}
-		pthread_mutex_unlock(&info->stop_mutex);
+		if (check_all_ate(info) || is_any_dead(info))
+			break;
 	}
-}
-
-int	should_stop(t_philo *philo)
-{
-    pthread_mutex_lock(&philo->info->eat_mutex);
-	if (philo->info->all_ate_flag == philo->info->philo_count)
-	{
-        pthread_mutex_lock(&philo->info->stop_mutex);
-        philo->info->end_sim = 1;
-        pthread_mutex_unlock(&philo->info->stop_mutex);
-        pthread_mutex_unlock(&philo->info->eat_mutex);
-		return (0);
-	}
-	if ((get_time() - (size_t)philo->last_meal_time) > (size_t)(philo->info->time_to_starve))
-	{
-        pthread_mutex_lock(&philo->info->stop_mutex);
-		philo->info->dead = philo->id;
-        philo->info->end_sim = 2;
-        pthread_mutex_unlock(&philo->info->stop_mutex);
-        pthread_mutex_unlock(&philo->info->eat_mutex);
-		return (0);
-	}
-    pthread_mutex_unlock(&philo->info->eat_mutex);
-	return (1);
+	return (NULL);
 }
 
 int	check_argv(int argc, char *argv[])

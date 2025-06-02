@@ -6,24 +6,85 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 00:56:53 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/21 07:34:38 by iguney           ###   ########.fr       */
+/*   Updated: 2025/06/02 21:38:49 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/philo.h"
 
+int	should_stop(t_info *info)
+{
+	int result;
+
+	pthread_mutex_lock(&info->stop_mutex);
+	result = info->end_sim;
+	pthread_mutex_unlock(&info->stop_mutex);
+	return (result);
+}
+
+int	check_all_ate(t_info *info)
+{
+	int i;
+
+	i = -1;
+    pthread_mutex_lock(&info->eat_mutex);
+	if (info->must_eat_count == -1)
+	{
+    	pthread_mutex_unlock(&info->eat_mutex);
+		return (0);
+	}
+	while (++i < info->philo_count)
+	{
+		if (info->all_ate_flag == info->philo_count)
+		{
+    	    pthread_mutex_lock(&info->stop_mutex);
+    	    info->end_sim = 1;
+    	    pthread_mutex_unlock(&info->stop_mutex);
+    	    pthread_mutex_unlock(&info->eat_mutex);
+			return (1);
+		}
+	}
+    pthread_mutex_unlock(&info->eat_mutex);
+	return (0);
+}
+
+int	is_any_dead(t_info *info)
+{
+	int i;
+
+	i = -1;
+    pthread_mutex_lock(&info->eat_mutex);
+	while (++i < info->philo_count)
+	{
+		if ((get_time() - info->philo->last_meal_time) > (size_t)(info->time_to_starve))
+		{
+			philo_print(info->philo, i + 1, "is dead");
+			pthread_mutex_lock(&info->stop_mutex);
+			info->end_sim = 1;
+			pthread_mutex_unlock(&info->stop_mutex);
+			pthread_mutex_unlock(&info->eat_mutex);
+			return(1);
+		}
+	}
+    pthread_mutex_unlock(&info->eat_mutex);
+	return (0);
+}
+
 void	destroy_mutex(t_info *info)
 {
-	int	philo_count;
+	int i;
 
-	philo_count = info->philo_count;
-	while (philo_count--)
-	{
-		pthread_mutex_unlock(&info->forks[philo_count]);
-		pthread_mutex_destroy(&info->forks[philo_count]);
-	}
-	pthread_mutex_unlock(&info->print_mutex);
+	i = -1;
+	while (++i < info->philo_count)
+		pthread_join(info->thread[i], NULL);
+	pthread_join(info->monitor_thread, NULL);
+	i = -1;
+	while (++i < info->philo_count)
+		pthread_mutex_destroy(&info->forks[i]);
 	pthread_mutex_destroy(&info->print_mutex);
-	pthread_mutex_unlock(&info->stop_mutex);
-	pthread_mutex_destroy(&info->stop_mutex);;
+	pthread_mutex_destroy(&info->eat_mutex);
+	pthread_mutex_destroy(&info->stop_mutex);
+	free(info->forks);
+	free(info->thread);
+	free(info->philo);
 }

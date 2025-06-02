@@ -27,6 +27,7 @@ typedef struct s_info
 
 	size_t			start_time;			// Simülasyon başlangıç zamanı (ms)
 
+	pthread_t		*thread;
 	pthread_t		monitor_thread;
 
 	pthread_mutex_t	*forks;				// Çatal mutexleri

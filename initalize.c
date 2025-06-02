@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initalize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
+/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 03:18:14 by iguney            #+#    #+#             */
-/*   Updated: 2025/05/31 19:33:35 by ilyas-guney      ###   ########.fr       */
+/*   Updated: 2025/06/02 20:10:28 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,11 @@ void	init_philosophers(t_info *info)
 void	init_threads(t_info *info)
 {
 	int i;
-	pthread_t		*thread;
 
 	i = -1;
-	thread = malloc(sizeof(pthread_t) * info->philo_count);
+	info->thread = malloc(sizeof(pthread_t) * info->philo_count);
 	info->start_time = get_time();
 	while (++i < info->philo_count)
-		pthread_create(&thread[i], NULL, philo_routine, (void *)&info->philo[i]);
+		pthread_create(&info->thread[i], NULL, philo_routine, (void *)&info->philo[i]);
 	pthread_create(&info->monitor_thread, NULL, monitor, (void *)info);
-	i = -1;
-	while (++i < info->philo_count)
-		pthread_join(thread[i], NULL);
-	pthread_join(info->monitor_thread, NULL);
 }
