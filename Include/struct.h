@@ -20,7 +20,7 @@ typedef struct s_info
 	int				philo_count;		// Filozof sayısı
 	int				time_to_eat;		// ms cinsinden: yeme süresi
 	int				time_to_sleep;		// ms cinsinden: uyuma süresi
-	int				time_to_starve;		// ms cinsinden: ölüm süresi
+	size_t			time_to_starve;		// ms cinsinden: ölüm süresi
 	int				must_eat_count;		// Opsiyonel: her filozofun yemesi gereken minimum sayı
 	int				all_ate_flag;		// Hepsi yeterince yedi mi?
 	int				end_sim;			// Ölüm oldu mu? Simülasyonu durdur

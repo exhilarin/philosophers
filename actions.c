@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 18:04:56 by ilyas-guney       #+#    #+#             */
-/*   Updated: 2025/06/02 21:47:50 by iguney           ###   ########.fr       */
+/*   Updated: 2025/06/02 22:20:33 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ void    eating(t_philo *philo)
 {
     pthread_mutex_lock(&philo->info->eat_mutex);
     philo->last_meal_time = get_time();
+    pthread_mutex_unlock(&philo->info->eat_mutex);
     philo_print(philo, philo->id, "is eating");
     smart_sleep(philo->info->time_to_eat);
     philo->meals_eaten++;
+    pthread_mutex_lock(&philo->info->eat_mutex);
     if ((philo->info->must_eat_count != -1) && philo->meals_eaten == philo->info->must_eat_count)
         philo->info->all_ate_flag++;
     pthread_mutex_unlock(&philo->info->eat_mutex);

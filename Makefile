@@ -4,7 +4,7 @@ OBJS_DIR = Objects
 OBJS = $(OBJS_DIR)/philo.o $(OBJS_DIR)/initalize.o $(OBJS_DIR)/actions.o $(OBJS_DIR)/control.o $(OBJS_DIR)/terminate.o $(OBJS_DIR)/utils.o
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g 
 
 all: $(NAME)
 

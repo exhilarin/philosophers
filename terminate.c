@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 00:56:53 by iguney            #+#    #+#             */
-/*   Updated: 2025/06/02 21:38:49 by iguney           ###   ########.fr       */
+/*   Updated: 2025/06/02 22:03:00 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,20 @@ int	is_any_dead(t_info *info)
 	int i;
 
 	i = -1;
-    pthread_mutex_lock(&info->eat_mutex);
 	while (++i < info->philo_count)
 	{
-		if ((get_time() - info->philo->last_meal_time) > (size_t)(info->time_to_starve))
+    	pthread_mutex_lock(&info->eat_mutex);
+		if ((get_time() - info->philo->last_meal_time) > (info->time_to_starve))
 		{
-			philo_print(info->philo, i + 1, "is dead");
+			philo_print(info->philo, i, "is dead");
 			pthread_mutex_lock(&info->stop_mutex);
 			info->end_sim = 1;
 			pthread_mutex_unlock(&info->stop_mutex);
 			pthread_mutex_unlock(&info->eat_mutex);
 			return(1);
 		}
+    	pthread_mutex_unlock(&info->eat_mutex);
 	}
-    pthread_mutex_unlock(&info->eat_mutex);
 	return (0);
 }
 
