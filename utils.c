@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
+/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:51:11 by iguney            #+#    #+#             */
-/*   Updated: 2025/06/03 06:14:01 by ilyas-guney      ###   ########.fr       */
+/*   Updated: 2025/06/03 07:02:52 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	ft_atoi(const char *str)
 	i = 0;
 	sign = 1;
 	result = 0;
-	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '\v'
-		|| str[i] == '\f' || str[i] == '\r')
+	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t'
+		|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
@@ -33,7 +33,7 @@ int	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		result = (result * 10) + (str[i] - '0');
-		if(result > 2147483647)
+		if (result > 2147483647)
 			return (0);
 		i++;
 	}
@@ -74,7 +74,8 @@ void	philo_print(t_philo *philo, int id, char *str)
 	pthread_mutex_lock(&philo->info->print_mutex);
 	pthread_mutex_lock(&philo->info->stop_mutex);
 	if (philo->info->end_sim == 0)
-		printf("%zu %d %s\n", get_time() - philo->info->start_time, id + 1, str);
+		printf("%zu %d %s\n",
+			get_time() - philo->info->start_time, id + 1, str);
 	pthread_mutex_unlock(&philo->info->print_mutex);
 	pthread_mutex_unlock(&philo->info->stop_mutex);
 }

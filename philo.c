@@ -6,15 +6,15 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 23:01:13 by iguney            #+#    #+#             */
-/*   Updated: 2025/06/02 19:56:07 by iguney           ###   ########.fr       */
+/*   Updated: 2025/06/03 07:06:57 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./Include/philo.h"
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_info info;
+	t_info	info;
 
 	if (check_argv(argc, argv))
 		return (1);
@@ -22,7 +22,5 @@ int main(int argc, char *argv[])
 	init_mutex(&info);
 	init_philosophers(&info);
 	init_threads(&info);
-	destroy_mutex(&info);
+	end_sim(&info);
 }
-
-// TODO: Monitor fonksiyonunu ve monitor için gerekli fonksiyonları yaz.

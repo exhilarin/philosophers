@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   terminate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
+/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 00:56:53 by iguney            #+#    #+#             */
-/*   Updated: 2025/06/03 00:31:52 by ilyas-guney      ###   ########.fr       */
+/*   Updated: 2025/06/03 07:07:07 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	should_stop(t_info *info)
 {
-	int result;
+	int	result;
 
 	pthread_mutex_lock(&info->stop_mutex);
 	result = info->end_sim;
@@ -24,55 +24,56 @@ int	should_stop(t_info *info)
 
 int	check_all_ate(t_info *info)
 {
-	int i;
+	int	i;
 
 	i = -1;
-    pthread_mutex_lock(&info->eat_mutex);
+	pthread_mutex_lock(&info->eat_mutex);
 	if (info->must_eat_count == -1)
 	{
-    	pthread_mutex_unlock(&info->eat_mutex);
+		pthread_mutex_unlock(&info->eat_mutex);
 		return (0);
 	}
 	while (++i < info->philo_count)
 	{
 		if (info->all_ate_flag == info->philo_count)
 		{
-    	    pthread_mutex_lock(&info->stop_mutex);
-    	    info->end_sim = 1;
-    	    pthread_mutex_unlock(&info->stop_mutex);
-    	    pthread_mutex_unlock(&info->eat_mutex);
+			pthread_mutex_lock(&info->stop_mutex);
+			info->end_sim = 1;
+			pthread_mutex_unlock(&info->stop_mutex);
+			pthread_mutex_unlock(&info->eat_mutex);
 			return (1);
 		}
 	}
-    pthread_mutex_unlock(&info->eat_mutex);
+	pthread_mutex_unlock(&info->eat_mutex);
 	return (0);
 }
 
 int	is_any_dead(t_info *info)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < info->philo_count)
 	{
-    	pthread_mutex_lock(&info->eat_mutex);
-		if ((get_time() - info->philo[i].last_meal_time) > info->time_to_starve)
+		pthread_mutex_lock(&info->eat_mutex);
+		if ((get_time() - info->philo[i].last_meal_time)
+			> info->time_to_starve)
 		{
 			philo_print(info->philo, i, "is dead");
 			pthread_mutex_lock(&info->stop_mutex);
 			info->end_sim = 1;
 			pthread_mutex_unlock(&info->stop_mutex);
 			pthread_mutex_unlock(&info->eat_mutex);
-			return(1);
+			return (1);
 		}
-    	pthread_mutex_unlock(&info->eat_mutex);
+		pthread_mutex_unlock(&info->eat_mutex);
 	}
 	return (0);
 }
 
-void	destroy_mutex(t_info *info)
+void	end_sim(t_info *info)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < info->philo_count)
