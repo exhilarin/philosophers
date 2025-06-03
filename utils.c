@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 02:51:11 by iguney            #+#    #+#             */
-/*   Updated: 2025/06/02 20:33:18 by iguney           ###   ########.fr       */
+/*   Updated: 2025/06/03 06:14:01 by ilyas-guney      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	smart_sleep(size_t wait_time)
 
 	start = get_time();
 	while ((get_time() - start) < wait_time)
-		usleep(500);
+		usleep(100);
 }
 
 void	philo_print(t_philo *philo, int id, char *str)

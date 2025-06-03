@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 07:49:52 by iguney            #+#    #+#             */
-/*   Updated: 2025/06/02 21:48:42 by iguney           ###   ########.fr       */
+/*   Updated: 2025/06/03 00:47:21 by ilyas-guney      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void *philo_routine(void *arg)
 	while (!should_stop(philo->info))
 	{
 		take_forks(philo);
+		if (philo->info->philo_count == 1)
+			return (NULL);
 		eating(philo);
 		drop_forks(philo);
 		sleeping(philo);
@@ -33,10 +35,8 @@ void	*monitor(void *arg)
 	
 	info = (t_info *)arg;
 	while (!should_stop(info))
-	{
 		if (check_all_ate(info) || is_any_dead(info))
 			break;
-	}
 	return (NULL);
 }
 
@@ -48,10 +48,8 @@ int	check_argv(int argc, char *argv[])
 	if (argc != 5 && argc != 6)
 		return (printf("Error: 5 or 6 arguments required.\n"), 1);
 	while (argv[++i])
-	{
 		if (!is_digit(argv[i]) || (ft_atoi(argv[i]) < 1))
 			return (printf("Error: Invalid Input!\n"), 1);
-	}
 	return (0);
 }
 

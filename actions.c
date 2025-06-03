@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 18:04:56 by ilyas-guney       #+#    #+#             */
-/*   Updated: 2025/06/02 22:20:33 by iguney           ###   ########.fr       */
+/*   Updated: 2025/06/03 06:12:00 by ilyas-guney      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void    take_forks(t_philo *philo)
     {
         pthread_mutex_lock(philo->right_fork);
         philo_print(philo, philo->id, "has taken a fork");
+        if (philo->info->philo_count == 1)
+        {
+            pthread_mutex_unlock(philo->right_fork);
+            return ;
+        }
         pthread_mutex_lock(philo->left_fork);
         philo_print(philo, philo->id, "has taken a fork");
     }
@@ -28,12 +33,13 @@ void    take_forks(t_philo *philo)
         pthread_mutex_lock(philo->right_fork);
         philo_print(philo, philo->id, "has taken a fork");
     }
-}
-void    eating(t_philo *philo)
-{
     pthread_mutex_lock(&philo->info->eat_mutex);
     philo->last_meal_time = get_time();
     pthread_mutex_unlock(&philo->info->eat_mutex);
+}
+
+void    eating(t_philo *philo)
+{
     philo_print(philo, philo->id, "is eating");
     smart_sleep(philo->info->time_to_eat);
     philo->meals_eaten++;
@@ -54,4 +60,5 @@ void    sleeping(t_philo *philo)
     philo_print(philo, philo->id, "is sleeping");
     smart_sleep(philo->info->time_to_sleep);
     philo_print(philo, philo->id, "is thinking");
+    smart_sleep(5);
 }

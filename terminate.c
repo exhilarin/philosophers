@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   terminate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ilyas-guney <ilyas-guney@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 00:56:53 by iguney            #+#    #+#             */
-/*   Updated: 2025/06/02 22:03:00 by iguney           ###   ########.fr       */
+/*   Updated: 2025/06/03 00:31:52 by ilyas-guney      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	is_any_dead(t_info *info)
 	while (++i < info->philo_count)
 	{
     	pthread_mutex_lock(&info->eat_mutex);
-		if ((get_time() - info->philo->last_meal_time) > (info->time_to_starve))
+		if ((get_time() - info->philo[i].last_meal_time) > info->time_to_starve)
 		{
 			philo_print(info->philo, i, "is dead");
 			pthread_mutex_lock(&info->stop_mutex);
