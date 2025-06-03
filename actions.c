@@ -6,7 +6,7 @@
 /*   By: iguney <iguney@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 18:04:56 by ilyas-guney       #+#    #+#             */
-/*   Updated: 2025/06/03 07:10:19 by iguney           ###   ########.fr       */
+/*   Updated: 2025/06/03 07:25:54 by iguney           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,4 @@ void	sleeping(t_philo *philo)
 	philo_print(philo, philo->id, "is sleeping");
 	smart_sleep(philo->info->time_to_sleep);
 	philo_print(philo, philo->id, "is thinking");
-	smart_sleep(3);
 }
